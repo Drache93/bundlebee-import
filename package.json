@@ -1,7 +1,7 @@
 {
-  "name": "@holepunchto/repo-template",
+  "name": "pear-import",
   "version": "0.0.1",
-  "description": "repo-template",
+  "description": "Peer-to-peer module imports over Hypercore",
   "main": "index.js",
   "exports": {
     "./package": "./package.json",
@@ -13,13 +13,17 @@
   "files": [
     "package.json",
     "index.js",
-    "index.d.ts"
+    "index.d.ts",
+    "lib/link.js"
   ],
   "devDependencies": {
+    "b4a": "^1.7.5",
     "brittle": "^3.19.0",
+    "corestore": "^7.8.0",
     "lunte": "^1.2.0",
     "prettier": "^3.6.2",
-    "prettier-config-holepunch": "^2.0.0"
+    "prettier-config-holepunch": "^2.0.0",
+    "z32": "^1.1.0"
   },
   "scripts": {
     "format": "prettier . --write",
@@ -28,12 +32,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/holepunchto/repo-template.git"
+    "url": "https://github.com/holepunchto/pear-import.git"
   },
   "author": "Holepunch Inc",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/holepunchto/repo-template/issues"
+    "url": "https://github.com/holepunchto/pear-import/issues"
   },
-  "homepage": "https://github.com/holepunchto/repo-template"
+  "homepage": "https://github.com/holepunchto/pear-import",
+  "dependencies": {
+    "bundlebee": "^1.0.0",
+    "pear-link": "^4.2.1"
+  }
 }
