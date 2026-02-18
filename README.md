@@ -2,7 +2,7 @@
 
 Peer-to-peer module imports over Hypercore. Like `require()` or `import`, but the modules live on the distributed web.
 
-Uses [pear-link](https://github.com/holepunchto/pear-link) to resolve `git+pear://` links and [bundlebee](https://github.com/holepunchto/bundlebee) to load bundled modules from Hyperbee.
+Uses [pear-link](https://github.com/holepunchto/pear-link) to resolve `bundle+pear://` links and [bundlebee](https://github.com/holepunchto/bundlebee) to load bundled modules from Hyperbee.
 
 ## Install
 
@@ -18,7 +18,7 @@ const Import = require('pear-import')
 
 const store = new Corestore('./storage')
 
-const myLib = await Import(store, 'git+pear://abc123...def/index.js')
+const myLib = await Import(store, 'bundle+pear://abc123...def/index.js')
 
 console.log(myLib) // module.exports from the remote module
 ```
@@ -29,14 +29,14 @@ Currently older versions of a Bundle can be checked out by choosing the Hypercor
 
 ```js
 // checkout at length 3
-const myLib = await Import(store, 'git+pear://0.3.abc123...def/index.js')
+const myLib = await Import(store, 'bundle+pear://0.3.abc123...def/index.js')
 
 console.log(myLib) // module.exports from the remote module
 ```
 
 ## How it works
 
-1. A `git+pear://` link is parsed to extract the Hypercore drive key and module pathname.
+1. A `bundle+pear://` link is parsed to extract the Hypercore drive key and module pathname.
 2. A BundleBee instance connects to the drive using the provided Corestore.
 3. The target module is loaded and its exports are returned — just like `require()`.
 
@@ -46,10 +46,10 @@ Modules are distributed as bundles stored in a Hyperbee, replicated over the Hyp
 
 ### `const exports = await Import(store, link, [opts])`
 
-Import a module from a `git+pear://` link.
+Import a module from a `bundle+pear://` link.
 
 - `store` — A [Corestore](https://github.com/holepunchto/corestore) instance for storage and replication.
-- `link` — A `git+pear://` link string pointing to the bundled module (e.g. `git+pear://<key>/path/to/module.js`).
+- `link` — A `bundle+pear://` link string pointing to the bundled module (e.g. `bundle+pear://<key>/path/to/module.js`).
 - `opts` — Optional. Forwarded to BundleBee and the module loader.
 
 Returns a promise that resolves to the module's `exports`.
