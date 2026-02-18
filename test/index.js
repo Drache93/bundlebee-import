@@ -41,21 +41,21 @@ test('basic', async (t) => {
   // get latest
   {
     const key = z32.encode(b.key)
-    const mod = await PearImport(store, `git+pear://0.4.${key}/entrypoint.js?b`)
+    const mod = await PearImport(store, `bundle+pear://0.4.${key}/entrypoint.js?b`)
     t.is(mod.toString(), `() => b4a.from('bundle-2').toString('utf-8')`)
   }
 
   // get first
   {
     const key = z32.encode(b.key)
-    const mod = await PearImport(store, `git+pear://0.1.${key}/entrypoint.js?b`)
+    const mod = await PearImport(store, `bundle+pear://0.1.${key}/entrypoint.js?b`)
     t.is(mod, 'bundle-0')
   }
 
   // get 2nd
   {
     const key = z32.encode(b.key)
-    const mod = await PearImport(store, `git+pear://0.2.${key}/entrypoint.js?b`)
+    const mod = await PearImport(store, `bundle+pear://0.2.${key}/entrypoint.js?b`)
     t.is(mod, 'bundle-1')
   }
 })

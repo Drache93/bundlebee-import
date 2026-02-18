@@ -1,4 +1,10 @@
 declare module 'pear-import' {
+  namespace Import {
+    interface Options {
+      [key: string]: any
+    }
+  }
+
   /**
    * Import a module from the peer-to-peer network using a pear:// link.
    *
@@ -17,12 +23,6 @@ declare module 'pear-import' {
    * ```
    */
   function Import(store: any, link: string, opts?: Import.Options): Promise<any>
-
-  namespace Import {
-    interface Options {
-      [key: string]: any
-    }
-  }
 
   export = Import
 }

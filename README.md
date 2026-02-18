@@ -33,7 +33,6 @@ const myLib = await Import(store, 'git+pear://0.3.abc123...def/index.js')
 
 console.log(myLib) // module.exports from the remote module
 ```
-```
 
 ## How it works
 
