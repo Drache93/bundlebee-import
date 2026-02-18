@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/holepunchto/pear-import",
   "dependencies": {
-    "bundlebee": "^1.0.0",
+    "hyperbundle": "^2.0.0",
     "pear-link": "^4.2.1"
   }
 }
