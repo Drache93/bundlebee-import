@@ -7,6 +7,12 @@ async function Import(store, link, opts = {}) {
   const b = new Hyperbundle(store, { key: parsed.drive.key, ...opts })
   await b.ready()
 
+  if (opts.swarm) {
+    opts.swarm.join(b.discoveryKey, { client: true, server: true })
+    await opts.swarm.flush()
+    await b.core.update()
+  }
+
   let targetLength = parsed.drive.length
 
   const { length: latestLength } = b.head()
