@@ -38,7 +38,7 @@ test('basic', async (t) => {
   // get abi
   {
     const key = z32.encode(b.key)
-    const mod = await PearImport(store, `bundle+pear://0.2.${key}/entrypoint.js?b&abi=10`)
+    const mod = await PearImport(store, `bundle+pear://${key}/entrypoint.js?b&abi=10`)
     t.is(mod, 'bundle-1')
   }
 })
