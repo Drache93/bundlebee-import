@@ -10,14 +10,15 @@ test('basic', async (t) => {
     store,
     './test/fixtures/0.bundle',
     './test/fixtures/1.bundle',
-    './test/fixtures/2.bundle'
+    './test/fixtures/2.bundle',
+    { bundle: './test/fixtures/1.bundle', abi: 10 }
   )
 
   // get latest
   {
     const key = z32.encode(b.key)
     const mod = await PearImport(store, `bundle+pear://${key}/entrypoint.js?b`)
-    t.is(mod.toString(), 'bundle-2')
+    t.is(mod.toString(), 'bundle-1')
   }
 
   // get first
@@ -31,6 +32,13 @@ test('basic', async (t) => {
   {
     const key = z32.encode(b.key)
     const mod = await PearImport(store, `bundle+pear://0.2.${key}/entrypoint.js?b`)
+    t.is(mod, 'bundle-1')
+  }
+
+  // get abi
+  {
+    const key = z32.encode(b.key)
+    const mod = await PearImport(store, `bundle+pear://0.2.${key}/entrypoint.js?b&abi=10`)
     t.is(mod, 'bundle-1')
   }
 })

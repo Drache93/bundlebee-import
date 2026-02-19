@@ -7,19 +7,26 @@ async function Import(store, link, opts = {}) {
   const b = new Hyperbundle(store, { key: parsed.drive.key, ...opts })
   await b.ready()
 
+  let targetLength = parsed.drive.length
+
   const { length: latestLength } = b.head()
-  if (parsed.drive.length > latestLength) {
+  if (targetLength > latestLength) {
     throw new Error(
-      `Requested length ${parsed.drive.length} is higher than current length ${latestLength}`
+      `Requested length ${targetLength} is higher than current length ${latestLength}`
     )
   }
 
-  const mod = await b.load(
-    new URL(`file:${__dirname}/`),
-    parsed.pathname,
-    parsed.drive.length,
-    opts
-  )
+  const search = new URLSearchParams(parsed.search)
+  const abi = search && search.has('abi') ? parseInt(search.get('abi'), 10) : 0
+
+  if (abi) {
+    const checkout = await b.findABI(abi)
+    if (checkout) {
+      targetLength = checkout
+    }
+  }
+
+  const mod = await b.load(new URL(`file:${__dirname}/`), parsed.pathname, targetLength, opts)
 
   await b.close()
 
