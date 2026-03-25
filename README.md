@@ -4,6 +4,8 @@ Peer-to-peer module imports over Hypercore. Like `require()` or `import`, but th
 
 Uses [pear-link](https://github.com/holepunchto/pear-link) to resolve `bundle+pear://` links and [bundlebee](https://github.com/holepunchto/bundlebee) to load bundled modules from Hyperbee.
 
+See the [bundlebee-cli](https://github.com/holepunchto/bundlebee-cli) for release flow of pushing new bundles and getting import links.
+
 ## Install
 
 ```

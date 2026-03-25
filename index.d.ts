@@ -16,7 +16,7 @@ declare module 'bundlebee-import' {
    * @example
    * ```js
    * const Corestore = require('corestore')
-   * const Import = require('pear-import')
+   * const Import = require('bundlebee-import')
    *
    * const store = new Corestore('./storage')
    * const myLib = await Import(store, 'pear://abc123...def/index.js')

@@ -1,5 +1,5 @@
 {
-  "name": "pear-import",
+  "name": "bundlebee-import",
   "version": "1.0.0",
   "description": "Peer-to-peer module imports over Hypercore",
   "main": "index.js",
@@ -32,14 +32,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/holepunchto/pear-import.git"
+    "url": "https://github.com/holepunchto/bundlebee-import.git"
   },
   "author": "Holepunch Inc",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/holepunchto/pear-import/issues"
+    "url": "https://github.com/holepunchto/bundlebee-import/issues"
   },
-  "homepage": "https://github.com/holepunchto/pear-import",
+  "homepage": "https://github.com/holepunchto/bundlebee-import",
   "dependencies": {
     "bundlebee": "^1.1.1",
     "pear-link": "^4.2.1"
