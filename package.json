@@ -1,6 +1,6 @@
 {
   "name": "pear-import",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Peer-to-peer module imports over Hypercore",
   "main": "index.js",
   "exports": {
@@ -27,8 +27,8 @@
   },
   "scripts": {
     "format": "prettier . --write",
-    "test": "prettier . --check && lunte && brittle-bare test/index.js",
-    "lint": "lunte"
+    "test": "brittle-bare test/index.js",
+    "lint": "prettier . --check && lunte"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/holepunchto/pear-import",
   "dependencies": {
-    "hyperbundle": "^2.0.4",
+    "bundlebee": "^1.1.1",
     "pear-link": "^4.2.1"
   }
 }

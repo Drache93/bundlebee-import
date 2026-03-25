@@ -1,38 +1,41 @@
 const BundleLink = require('./lib/link')
-const Hyperbundle = require('hyperbundle')
+const Bundlebee = require('bundlebee')
 
 async function Import(store, link, opts = {}) {
   const parsed = BundleLink.parse(link)
+
   // TODO check parsed.search for import method. ?b === bundle
-  const b = new Hyperbundle(store, { key: parsed.drive.key, ...opts })
+
+  parsed.drive.length = parsed.drive.length || -1
+  const b = new Bundlebee(store, { ...parsed.drive, ...opts })
   await b.ready()
 
   if (opts.swarm) {
     opts.swarm.join(b.discoveryKey, { client: true, server: true })
     await opts.swarm.flush()
-    await b.core.update()
   }
 
-  let targetLength = parsed.drive.length
+  await b.core.update({ wait: true })
 
-  const { length: latestLength } = b.head()
-  if (targetLength > latestLength) {
+  const latest = b.head()
+  if (latest && parsed.drive.length > latest.length) {
     throw new Error(
-      `Requested length ${targetLength} is higher than current length ${latestLength}`
+      `Requested length ${parsed.drive.length} is higher than latest ${latest.length}`
     )
   }
 
   const search = new URLSearchParams(parsed.search)
   const abi = search && search.has('abi') ? parseInt(search.get('abi'), 10) : 0
 
+  let checkout = parsed.drive.length > 0 ? parsed.drive : undefined
   if (abi) {
-    const checkout = await b.findABI(abi)
-    if (checkout) {
-      targetLength = checkout
+    checkout = await b.findABI(abi)
+    if (!checkout) {
+      throw new Error(`ABI ${abi} not found`)
     }
   }
 
-  const mod = await b.load(new URL(`file:${__dirname}/`), parsed.pathname, targetLength, opts)
+  const mod = await b.load(new URL(`file:${__dirname}/`), parsed.pathname, checkout)
 
   await b.close()
 
