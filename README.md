@@ -17,10 +17,24 @@ const Corestore = require('corestore')
 const Import = require('pear-import')
 
 const store = new Corestore('./storage')
+// <-- replicate
+
+const b4a = await Import(store.namespace('b4a'), 'bundle+pear://abc123...def/index.js')
+const z32 = await Import(store.namespace('z32'), 'bundle+pear://abc123...def/index.js')
+
+const key = z32.encode(b4a.alloc(32, 'hi!'))
+```
+
+### Import multiple
+
+```js
+const Corestore = require('corestore')
+const Import = require('pear-import')
+
+const store = new Corestore('./storage')
+// <-- replicate
 
 const myLib = await Import(store, 'bundle+pear://abc123...def/index.js')
-
-console.log(myLib) // module.exports from the remote module
 ```
 
 ### Checkout specific version
