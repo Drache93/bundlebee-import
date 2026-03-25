@@ -1,4 +1,4 @@
-# pear-import
+# bundlebee-import
 
 Peer-to-peer module imports over Hypercore. Like `require()` or `import`, but the modules live on the distributed web.
 
@@ -7,14 +7,14 @@ Uses [pear-link](https://github.com/holepunchto/pear-link) to resolve `bundle+pe
 ## Install
 
 ```
-npm install pear-import
+npm install bundlebee-import
 ```
 
 ## Usage
 
 ```js
 const Corestore = require('corestore')
-const Import = require('pear-import')
+const Import = require('bundlebee-import')
 
 const store = new Corestore('./storage')
 // <-- replicate
@@ -29,7 +29,7 @@ const key = z32.encode(b4a.alloc(32, 'hi!'))
 
 ```js
 const Corestore = require('corestore')
-const Import = require('pear-import')
+const Import = require('bundlebee-import')
 
 const store = new Corestore('./storage')
 // <-- replicate

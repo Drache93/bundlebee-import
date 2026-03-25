@@ -9,7 +9,7 @@ async function Import(store, link, opts = {}) {
       throw new Error('Invalid link')
     }
 
-    // TODO check parsed.search for import method. ?b === bundle
+    const search = new URLSearchParams(parsed.search)
 
     parsed.drive.length = parsed.drive.length || -1
     b = new Bundlebee(store, { ...parsed.drive, ...opts })
@@ -22,7 +22,6 @@ async function Import(store, link, opts = {}) {
 
     await b.core.update({ wait: true })
 
-    const search = new URLSearchParams(parsed.search)
     const abi = search && search.has('abi') ? parseInt(search.get('abi'), 10) : 0
 
     let checkout = parsed.drive.length > 0 ? parsed.drive : undefined

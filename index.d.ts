@@ -1,4 +1,4 @@
-declare module 'pear-import' {
+declare module 'bundlebee-import' {
   namespace Import {
     interface Options {
       [key: string]: any
