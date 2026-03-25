@@ -19,8 +19,8 @@ const Import = require('pear-import')
 const store = new Corestore('./storage')
 // <-- replicate
 
-const b4a = await Import(store.namespace('b4a'), 'bundle+pear://abc123...def/index.js')
-const z32 = await Import(store.namespace('z32'), 'bundle+pear://abc123...def/index.js')
+const b4a = await Import(store.session(), 'bundle+pear://abc123...def/index.js')
+const z32 = await Import(store.session(), 'bundle+pear://abc123...def/index.js')
 
 const key = z32.encode(b4a.alloc(32, 'hi!'))
 ```
