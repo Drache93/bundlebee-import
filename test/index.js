@@ -20,31 +20,47 @@ test('basic', async (t) => {
   const s2 = store2.replicate(false)
   s1.pipe(s2).pipe(s1)
 
+  const key = z32.encode(b.key)
+
   // get latest
   {
-    const key = z32.encode(b.key)
     const mod = await PearImport(store2.session(), `bundle+pear://${key}/entrypoint.js?b`)
     t.is(mod.toString(), 'bundle-1')
   }
 
   // get first
   {
-    const key = z32.encode(b.key)
     const mod = await PearImport(store2.session(), `bundle+pear://0.1.${key}/entrypoint.js?b`)
     t.is(mod, 'bundle-0')
   }
 
   // get 2nd
   {
-    const key = z32.encode(b.key)
     const mod = await PearImport(store2.session(), `bundle+pear://0.2.${key}/entrypoint.js?b`)
     t.is(mod, 'bundle-1')
   }
 
   // get abi
   {
-    const key = z32.encode(b.key)
     const mod = await PearImport(store2.session(), `bundle+pear://${key}/entrypoint.js?b&abi=3`)
     t.is(mod, 'bundle-2')
+  }
+})
+
+test('bad', async (t) => {
+  const store = new Corestore(await t.tmp())
+
+  {
+    await t.exception(() => PearImport(store.session(), `bundle.js?b`), /Error: Invalid link/)
+  }
+
+  {
+    await t.exception(
+      () =>
+        PearImport(store.session(), `bundle+pear://bad`).catch((e) => {
+          throw e.name
+        }),
+      /ERR_INVALID_LINK/
+    )
   }
 })
