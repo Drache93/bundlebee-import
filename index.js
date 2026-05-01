@@ -17,7 +17,7 @@ async function Import(store, link, opts = {}) {
 
     if (opts.swarm) {
       opts.swarm.join(b.discoveryKey, { client: true, server: true })
-      await opts.swarm.flush()
+      if (opts.wait === true) await opts.swarm.flush()
     }
 
     await b.core.update({ wait: true })
