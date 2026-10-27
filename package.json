@@ -2,19 +2,20 @@
   "name": "bundlebee-import",
   "version": "2.0.0",
   "description": "Peer-to-peer module imports over Hypercore",
-  "main": "index.js",
+  "main": "dist/index.cjs",
   "exports": {
     "./package": "./package.json",
     ".": {
-      "types": "./index.d.ts",
-      "default": "./index.js"
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    },
+    "./types": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "files": [
-    "package.json",
-    "index.js",
-    "index.d.ts",
-    "lib"
+    "dist"
   ],
   "devDependencies": {
     "b4a": "^1.7.5",
@@ -34,12 +35,14 @@
   },
   "scripts": {
     "format": "prettier . --write",
-    "test": "npm run test:node && npm run test:bare",
+    "test": "npm run build && npm run test:node && npm run test:bare",
     "test:node": "brittle-node test/node.mjs",
     "test:bare": "brittle-bare test/all.mjs",
     "test:generate": "brittle-make-test test/all.mjs test/selectors.js test/releases.js && brittle-make-test test/node.mjs test/selectors.js && prettier test/all.mjs test/node.mjs --write",
     "test:types": "tsc --noEmit --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext test/types.ts",
-    "lint": "prettier . --check && lunte"
+    "lint": "prettier . --check && lunte",
+    "build": "node scripts/build.mjs",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -52,15 +55,17 @@
   },
   "homepage": "https://github.com/holepunchto/bundlebee-import",
   "dependencies": {
-    "bare-abort-controller": "^1.1.0",
+    "bare-abort-controller": "^1.1.2",
     "bare-semver": "^1.1.0",
     "bundlebee": "^2.0.0",
     "hypercore-id-encoding": "^1.3.0",
     "hyperdht": "^6.29.0",
     "hyperswarm": "^4.17.2",
-    "pear-link": "^4.2.1"
+    "pear-link": "^4.2.1",
+    "safety-catch": "^1.0.3"
   },
   "engines": {
     "bare": ">=1.34.0"
-  }
+  },
+  "types": "dist/index.d.cts"
 }
